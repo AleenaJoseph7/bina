@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="h3.css">
+    <!-- Add your CSS links or styles here -->
+    <style>
+        .error {
+            color: red;
+            font-size: 13px; /* You can adjust the font size as needed */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fbox">
+        <div class="sbox">
+            <h2>COLLEGE OF ENGINEERING ARANMULA</h2>
+            <form action="" method="post">
+                <div id="getDataForm1">
+                    <h3>----GETDATA----</h3>
+                    <div id="getDataForm">
+                        <label for="" class="label" id="stname">Student Name:</label>
+                        <br>
+                        <input type="text" name="studentName" id="studentName" placeholder="Enter Student Name" class="input" oninput="validateAlphabetWithDot('studentName')">
+                        <br>
+                        <span id="studentNameError" style="color: red; font-size: smaller;"></span>
+                        <br>
+                        <label for="" class="label" id="sedob">Date of Birth:</label>
+                        <br>
+                        <input type="date" name="dob" id="dob" placeholder="dd/mm/yyyy" class="input">
+                        <br>
+                        <span id="dobError" style="color: red;font-size: smaller;"></span>
+                        <br>
+                        <input type="submit" value="Search" class="search" onclick="showsuccess()">
+                        <br>
+                        <input type="button" value="New Registration" class="newregister" onclick="showRegistrationForm()">
+                        <input type="button" value="Update" class="update" onclick="showUpdateForm()">
+                        <input type="button" value="Delete" class="delete" onclick="showDeleteForm()">
+                    </div>
+                </div>
+
+                <!-- Placeholder for Registration Form -->
+                <div>
+                    <div id="registrationForm" style="display: none;">
+                        <!-- Your registration form elements go here -->
+                        <h3>--Registration Form--</h3>
+                        <!-- Example: -->
+                        <h4 style="color: #4070f4; text-decoration:underline;">Personal Details:</h4>
+                        <br>
+                        <!-- Inside your registration form -->
+                        <label for="" class="label">Full Name:</label>
+                        <br>
+                        <input type="text" name="fullname" id="fullname" placeholder="Enter your name" class="input" oninput="validateAlphabetWithDot('fullname')">
+                        <br>
+                        <span id="fullnameError" style="color: red;font-weight: lighter;font-size: smaller;"></span>
+                        <br>
+                        <label for="" class="label">Date of Birth:</label>
+                        <br>
+                        <input type="date" name="dateofbirth" id="dateofbirth" placeholder="dd-mm-yyyy" class="input" onblur="validateDate('dob')">
+                        <br>
+                        <span id="dobError" style="color: red;font-weight: lighter;font-size: smaller;"></span>
+                        <br>
+                        <label for="" class="label" id="emailLabel">Email:</label>
+                        <br>
+                        <input type="email" name="email" id="email" placeholder="Enter your email" class="input" oninput="validateEmail('email')">
+                        <br>
+                        <span id="emailError" style="color: red;font-weight: lighter;font-size: smaller;"></span>
+                        <br>
+                        <label for="" class="label" id="mobilenoLabel">Mobile Number:</label>
+                        <br>
+                        <input type="number" name="mobileno" id="mobileno" placeholder="Enter mobile number" class="input" oninput="validatePhoneNumber()">
+                        <br>
+                        <span id="mobilenoError" style="color: red;font-weight: lighter;font-size: smaller;"></span>
+                        <br>
+                        <label for="" class="label">Gender:</label>
+                        <br>
+                        <select name="gender" id="gender" style="width:505px;border-color: #4070f4;height:40px;padding-left: 5px;color: grey;">
+                            <option value="select">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="others">Others</option>
+                        </select>
+                        <br>
+                        <br>
+                        <label for="" class="label">Age:</label>
+                        <br>
+                        <input type="number" name="age" id="age" placeholder="Enter Age" class="input">
+                        <br>
+                        <span id="ageError" class="error"></span>                        
+                        <br>
+                        <input type="button" value="Next" class="next1" onclick="movetonextpage('registrationForm', 'page1Error', 'nextForm')" style="background-color: #4070f4;color: whitesmoke;">
+                        <div id="page1Error" style="color: red; font-size: smaller;"></div>
+                    </div>
+
+
+                    <div id="nextForm" style="display:none;">
+                        <!-- Your delete functionality elements go here -->
+                        <h3>--Registration Form--</h3>
+                        <br>
+                        <h4 style="color: #4070f4;text-decoration: underline;">Admission Details</h4>
+                        <!-- Example: -->
+                        <br>
+                        <label for="" class="label">Admission no:</label>
+                        <br>
+                        <input type="text" name="admno" id="admno" placeholder="Enter your Adm no" class="input" oninput="validateAdmissionNumber()">
+                        <br>
+                        <span id="admnoError" class="error"></span>
+                        <br>
+                        <label for="" class="label">Admission Quota:</label>
+                        <br>
+                        <select name="admquota" id="admquota" style="width:505px;border-color: #4070f4;height:40px;padding-left: 5px;color: grey;">
+                            <option value="select">Select Admission Quota</option>
+                            <option value="merit">Merit</option>
+                            <option value="management">Management</option>
+                            <option value="fw">Fee Waiver</option>
+                        </select>
+                        <br>
+                        <br>
+                        <label for="" class="label">Date of Admission:</label>
+                        <br>
+                        <input type="date" name="doa" id="doa" placeholder="dd-mm-yyyy" class="input">
+                        <br>
+                        <br>
+                        <label for="" class="label">Admitted Program:</label>
+                        <br>
+                        <select name="admittedprgm" id="admittedprgm" style="width:505px;border-color: #4070f4;height:40px;padding-left: 5px;color: grey;">
+                            <option value="select">Select Program</option>
+                            <option value="btech">BTECH</option>
+                            <option value="diploma">Diploma</option>
+                            <option value="others">Others</option>
+                        </select>
+                        <br>
+                        <br>
+                        <label for="" class="label">Admitted Branch:</label>
+                        <br>
+                        <select name="branch" id="branch" style="width:505px;border-color: #4070f4;height:40px;padding-left: 5px;color: grey;">
+                            <option value="select">Select Branch</option>
+                            <option value="cs">CS</option>
+                            <option value="ec">EC</option>
+                            <option value="eee">EEE</option>
+                            <option value="ce">CE</option>
+                        </select>
+                        <br>
+                        <br>
+                        <input type="button" value="Back" class="next1" onclick="showbackone()" style="background-color: #4070f4;color: whitesmoke;">
+                        <input type="button" value="Next" class="next1" onclick="movetonextpage('nextForm', 'page2Error', 'next1Form')" style="background-color: #4070f4;color: whitesmoke;">
+                        <div id="page2Error" style="color: red; font-size: smaller;"></div>
+                    </div>
+
+
+                    <div id="next1Form" style="display:none;">
+                        <!-- Your delete functionality elements go here -->
+                        <h3>--Registration Form--</h3>
+                        <br>
+                        <h4 style="color: #4070f4;text-decoration: underline;">Address Details</h4>
+                        <!-- Example: -->
+                        <br>
+                        <label for="" class="label">Address:</label>
+                        <br>
+                        <input type="text" name="address" id="address" placeholder="Enter your Address" class="input" oninput="validateAddress('address')">
+                        <br>
+                        <span id="addressError" style="color: red; font-size: smaller;"></span>
+                        <br>
+                        <label for="pincode" class="label">Pincode:</label>
+                        <br>
+                        <input type="number" name="pincode" id="pincode" placeholder="Enter Pincode" class="input">
+                        <br>
+                        <span id="pincodeError" class="error"></span>                        
+                        <br>
+                        <label for="" class="label">Nationality:</label>
+                        <br>
+                        <input type="text" name="nationa" id="nation" placeholder="Enter your nationality" class="input" oninput="validateAlphabet('nation')">
+                        <br>
+                        <span id="nationError" style="color: red;font-weight: lighter;font-size: smaller;"></span>
+                        <br>
+                        <label for="" class="label">State:</label>
+                        <br>
+                        <input type="text" name="state" id="state" placeholder="Enter your state" class="input" oninput="validateAlphabet('state')">
+                        <br>
+                        <span id="stateError" style="color: red;font-weight: lighter;font-size: smaller;"></span>
+                        <br>
+                        <label for="" class="label">District:</label>
+                        <br>
+                        <input type="text" name="district" id="district" placeholder="Enter your district" class="input" oninput="validateAlphabet('district')">
+                        <br>
+                        <span id="districtError" style="color: red;font-weight: lighter;font-size: smaller;"></span>
+                        <br>
+                        <label for="" class="label">Panchayat:</label>
+                        <br>
+                        <input type="text" name="panchayat" id="panchayat" placeholder="Enter your panchayat" class="input" oninput="validateAlphabet('panchayat')">
+                        <br>
+                        <span id="panchayatError" style="color: red;font-weight: lighter;font-size: smaller;"></span>
+                        <br>
+                        <!-- Inside your registration form -->
+                        <label for="" class="label">Taluk:</label>
+                        <br>
+                        <input type="text" name="taluk" id="taluk" placeholder="Enter your taluk" class="input" oninput="validateAlphabet('taluk')">
+                        <br>
+                        <span id="talukError" style="color: red;font-weight: lighter;font-size: smaller;"></span>
+                        <br>
+                        <input type="button" value="Back" class="next1" onclick="backadm()" style="background-color: #4070f4;color: whitesmoke;">
+                        <input type="button" value="Next" class="next1" onclick="movetonextpage('next1Form', 'page3Error', 'next2Form')" style="background-color: #4070f4;color: whitesmoke;">
+                        <div id="page3Error" style="color: red; font-size: smaller;"></div>
+                    </div>
+
+                    <div id="next2Form" style="display:none;">
+                        <!-- Your delete functionality elements go here -->
+                        <h3>--Registration Form--</h3>
+                        <br>
+                        <h4 style="color: #4070f4;text-decoration: underline;">Family Details</h4>
+                        <!-- Example: -->
+                        <br>
+                        <label for="" class="label">Father's Name:</label>
+                        <br>
+                        <input type="text" name="fname" id="fname" placeholder="Enter your father's name" class="input" oninput="validateAlphabetWithDot('fname')">
+                        <br>
+                        <span id="fnameError" style="color: red;font-weight: lighter;font-size: smaller;"></span>
+                        <br>
+                        <label for="" class="label">Father's Occupation:</label>
+                        <br>
+                        <input type="text" name="fjob" id="fjob" placeholder="Enter your father's occupation" class="input" oninput="validateAlphabet('fjob')">
+                        <br>
+                        <span id="fjobError" style="color: red;font-weight: lighter;font-size: smaller;"></span>
+                        <br>
+                        <label for="femail" class="label">Father's Email:</label>
+                        <br>
+                        <input type="text" name="femail" id="femail" placeholder="Enter Father's Email" class="input" oninput="validateEmail('femail')">
+                        <br>
+                        <span id="femailError" style="color: red;font-weight: lighter;font-size: smaller;"></span>
+                        <br>
+                        <label for="" class="label">Mother's Name:</label>
+                        <br>
+                        <input type="text" name="mname" id="mname" placeholder="Enter your mother's name" class="input" oninput="validateAlphabetWithDot('mname')">
+                        <br>
+                        <span id="mnameError" style="color: red;font-weight: lighter;font-size: smaller;"></span>
+                        <br>
+                        <label for="" class="label">Mother's Occupation:</label>
+                        <br>
+                        <input type="text" name="mjob" id="mjob" placeholder="Enter your mother's occupation" class="input" oninput="validateAlphabet('mjob')">
+                        <br>
+                        <span id="mjobError" style="color: red;font-weight: lighter;font-size: smaller;"></span>
+                        <br>
+                        <label for="memail" class="label">Mother's Email:</label>
+                        <br>
+                        <input type="text" name="memail" id="memail" placeholder="Enter Mother's Email" class="input" oninput="validateEmail('memail')">
+                        <br>
+                        <span id="memailError" style="color: red;font-weight: lighter;font-size: smaller;"></span>
+                        <br>
+                        <label for="" class="label">Annual Income:</label>
+                        <br>
+                        <input type="number" name="no" id="no" placeholder="Enter Annual Inome" class="input">
+                        <br>
+                        <span id="incomeError" class="error"></span>                        
+                        <br>
+                        <input type="button" value="Back" class="next1" onclick="backaddress()" style="background-color: #4070f4;color: whitesmoke;">
+                        <input type="button" value="Submit" class="next1" onclick="movetonextpage('next2Form', 'page4Error','finalsubmit')" style="background-color: #4070f4;color: whitesmoke;">
+                        <div id="page4Error" style="color: red; font-size: smaller;"></div>
+                    </div>
+                  </div>
+
+                <div id="finalsubmit" style="display: none;">
+                    <!-- Your delete functionality elements go here -->
+                    <br>
+                    <h3 style="color: green;">--Registration Form Submitted Successfully--</h3>
+                    <br>
+                </div>
+
+                <!-- Placeholder for Update Form -->
+                <div id="updateForm" style="display: none;">
+                    <!-- Your update form elements go here -->
+                    <h3>--Update Form--</h3>
+                    <!-- Example: -->
+                    <label for="" class="label">Select Field to Update:</label>
+                    <br>
+                    <select name="updateField" id="updateField" style="width: 505px;border-color: #4070f4;height:35px;padding-left: 5px;color: grey;">
+                        <option value="select">Select</option>
+                        <option value="address">Address</option>
+                        <option value="gender">Gender</option>
+                        <option value="age">Age</option>
+                        <!-- Add other fields here -->
+                    </select>
+                    <br>
+                    <br>
+                    <label for="" class="label">Enter Updated Value:</label>
+                    <br>
+                    <br>
+                    <input type="text" name="updatedValue" id="updatedValue" placeholder="Enter Updated Value" class="input">
+                    <br>
+                    <input type="button" value="Update" class="update" onclick="updated()" style="background-color: #4070f4;color: whitesmoke;">
+                    <!-- Other update form fields -->
+                </div>
+
+                <!----After Update Screen Display-->
+                <div id="update" style="display: none;">
+                    <!-- Your update elements go here -->
+                    <br>
+                    <h3 style="color: green;">--Update Details Successfully--</h3>
+                    <br>
+                </div>
+
+                <!-- Placeholder for Delete Functionality -->
+                <div id="deleteForm" style="display: none;">
+                    <!-- Your delete functionality elements go here -->
+                    <h3>--Delete Functionality--</h3>
+                    <!-- Example: -->
+                    <label for="" class="label">Select Field to Delete:</label>
+                    <br>
+                    <select name="deleteField" id="deleteField" style="width:510px;border-color: #4070f4;padding-left: 5px;color: grey;">
+                        <option value="select">Select</option>
+                        <option value="address">Address</option>
+                        <option value="gender">Gender</option>
+                        <option value="age">Age</option>
+                        <!-- Add other fields here -->
+                    </select>
+                    <br>
+                    <input type="button" value="Delete" class="delete" onclick="deleted()" style="background-color: #4070f4;color: whitesmoke;">
+                    <!-- Other delete options -->
+                </div>
+
+                <!----After Delete Screen Display-->
+                <div id="delete" style="display: none;">
+                    <!-- Your update elements go here -->
+                    <br>
+                    <h3 style="color: green;">--Delete Details Successfully--</h3>
+                    <br>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="data"></div>
+
+
+    <script>
+
+        function showbackone() {
+            document.getElementById('registrationForm').style.display = 'block';
+            document.getElementById('getDataForm1').style.display = 'none';
+            document.getElementById('updateForm').style.display = 'none';
+            document.getElementById('deleteForm').style.display = 'none';
+            document.getElementById('nextForm').style.display = 'none'
+        }
+        function shownextone() {
+            if (checkRequiredFields('registrationForm', 'page1Error')) {
+                document.getElementById('registrationForm').style.display = 'none';
+                document.getElementById('getDataForm1').style.display = 'none';
+                document.getElementById('updateForm').style.display = 'none';
+                document.getElementById('deleteForm').style.display = 'none';
+                document.getElementById('nextForm').style.display = 'block';
+            }
+        }
+        function backadm() {
+            document.getElementById('registrationForm').style.display = 'none';
+            document.getElementById('getDataForm1').style.display = 'none';
+            document.getElementById('updateForm').style.display = 'none';
+            document.getElementById('deleteForm').style.display = 'none';
+            document.getElementById('nextForm').style.display = 'block';
+            document.getElementById('next1Form').style.display = 'none';
+        }
+        function shownexttwo() {
+            if (checkRequiredFields('nextForm', 'page2Error')) {
+                document.getElementById('registrationForm').style.display = 'none';
+                document.getElementById('getDataForm1').style.display = 'none';
+                document.getElementById('updateForm').style.display = 'none';
+                document.getElementById('deleteForm').style.display = 'none';
+                document.getElementById('nextForm').style.display = 'none';
+                document.getElementById('next1Form').style.display = 'block';
+            }
+        }
+        function backaddress() {
+            document.getElementById('registrationForm').style.display = 'none';
+            document.getElementById('getDataForm1').style.display = 'none';
+            document.getElementById('updateForm').style.display = 'none';
+            document.getElementById('deleteForm').style.display = 'none';
+            document.getElementById('nextForm').style.display = 'none';
+            document.getElementById('next1Form').style.display = 'block';
+            document.getElementById('next2Form').style.display = 'none';
+        }
+        function shownextthree() {
+            if (checkRequiredFields('next1Form', 'page3Error')) {
+                document.getElementById('registrationForm').style.display = 'none';
+                document.getElementById('getDataForm1').style.display = 'none';
+                document.getElementById('updateForm').style.display = 'none';
+                document.getElementById('deleteForm').style.display = 'none';
+                document.getElementById('nextForm').style.display = 'none';
+                document.getElementById('next1Form').style.display = 'none';
+                document.getElementById('next2Form').style.display = 'block';
+            }
+        }
+        function updated() {
+            document.getElementById('registrationForm').style.display = 'none';
+            document.getElementById('getDataForm1').style.display = 'none';
+            document.getElementById('updateForm').style.display = 'none';
+            document.getElementById('deleteForm').style.display = 'none';
+            document.getElementById('nextForm').style.display = 'none';
+            document.getElementById('next1Form').style.display = 'none';
+            document.getElementById('next2Form').style.display = 'none';
+            document.getElementById('update').style.display = 'block';
+        }
+        function deleted() {
+            document.getElementById('registrationForm').style.display = 'none';
+            document.getElementById('getDataForm1').style.display = 'none';
+            document.getElementById('updateForm').style.display = 'none';
+            document.getElementById('deleteForm').style.display = 'none';
+            document.getElementById('nextForm').style.display = 'none';
+            document.getElementById('next1Form').style.display = 'none';
+            document.getElementById('next2Form').style.display = 'none';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'block';
+        }
+        function showsuccess() {
+            document.getElementById('registrationForm').style.display = 'none';
+            document.getElementById('getDataForm1').style.display = 'none';
+            document.getElementById('updateForm').style.display = 'none';
+            document.getElementById('deleteForm').style.display = 'none';
+            document.getElementById('nextForm').style.display = 'none';
+        }
+        function showRegistrationForm() {
+            document.getElementById('registrationForm').style.display = 'block';
+            document.getElementById('getDataForm1').style.display = 'none';
+            document.getElementById('updateForm').style.display = 'none';
+            document.getElementById('deleteForm').style.display = 'none';
+            document.getElementById('nextForm').style.display = 'none';
+        }
+        function showUpdateForm() {
+            document.getElementById('registrationForm').style.display = 'none';
+            document.getElementById('getDataForm1').style.display = 'none';
+            document.getElementById('updateForm').style.display = 'block';
+            document.getElementById('deleteForm').style.display = 'none';
+            document.getElementById('nextForm').style.display = 'none';
+        }
+        function showDeleteForm() {
+            document.getElementById('registrationForm').style.display = 'none';
+            document.getElementById('getDataForm1').style.display = 'none';
+            document.getElementById('updateForm').style.display = 'none';
+            document.getElementById('deleteForm').style.display = 'block';
+            document.getElementById('nextForm').style.display = 'none';
+        }
+        function submitform() {
+        // Proceed with form submission
+        if (checkRequiredFields('next1Form', 'page3Error')) {
+        document.getElementById('registrationForm').style.display = 'none';
+        document.getElementById('getDataForm1').style.display = 'none';
+        document.getElementById('updateForm').style.display = 'none';
+        document.getElementById('deleteForm').style.display = 'none';
+        document.getElementById('nextForm').style.display = 'none';
+        document.getElementById('next1Form').style.display = 'none';
+        document.getElementById('next2Form').style.display = 'none';
+        document.getElementById('finalsubmit').style.display = 'block';
+     }
+    }
+        function showsuccess() {
+            // Validation for Get Data form
+            let studentName = document.getElementById('studentName').value;
+            let dob = document.getElementById('dob').value;
+            let studentNameError = document.getElementById('studentNameError');
+            let dobError = document.getElementById('dobError');
+            let hasError = false;
+            if (studentName === '') {
+                studentNameError.textContent = 'Please enter Student Name';
+                hasError = true;
+            } else {
+                dobError.textContent = '';
+            }
+            if (dob === '') {
+                dobError.textContent = 'Please enter Date of Birth';
+                hasError = true;
+            } else {
+                dobError.textContent = '';
+            }
+            if (hasError) {
+                return false;
+            }
+        }
+
+        function validateAlphabet(inputFieldId) {
+            let inputField = document.getElementById(inputFieldId);
+            let errorSpan = document.getElementById(inputFieldId + 'Error');
+            let inputValue = inputField.value;
+            // Check if the input contains only alphabets and spaces
+            if (/[^A-Za-z\s]/.test(inputValue)) {
+                errorSpan.textContent = 'Only alphabets and spaces are allowed';
+                inputField.value = ''; // Clear the input value
+            } else {
+                errorSpan.textContent = '';
+                return true;
+            }
+        }
+
+        function validateAlphabetWithDot(inputFieldId) {
+           let inputField = document.getElementById(inputFieldId);
+           let errorSpan = document.getElementById(inputFieldId + 'Error');
+           let inputValue = inputField.value.trim(); // Trim leading and trailing spaces
+           // Check if the input contains only alphabets, spaces, and dots
+              if (/[^A-Za-z\s.]/.test(inputValue)) {
+              errorSpan.textContent = 'Only alphabets, spaces, and dots are allowed';
+              inputField.value = ''; // Clear the input value
+               } else {
+              errorSpan.textContent = '';
+              return true;
+              }
+        }
+
+        function validateAddress(inputFieldId) {
+            let inputField = document.getElementById(inputFieldId);
+            let errorSpan = document.getElementById(inputFieldId + 'Error');
+            let inputValue = inputField.value.trim(); // Trim leading and trailing spaces
+            // Check if the input contains only alphabets, spaces, commas,dots and parentheses
+            if (/[^A-Za-z\s,().]/.test(inputValue)) {
+                errorSpan.textContent = 'Only alphabets, spaces, commas, and parentheses are allowed';
+                inputField.value = ''; // Clear the input value
+            } else {
+                errorSpan.textContent = '';
+                return true;
+             }
+            }
+
+            function validatePhoneNumber() {
+            let phoneNumberInput = document.getElementById('mobileno');
+            let phoneNumberError = document.getElementById('mobilenoError');
+            let phoneNumber = phoneNumberInput.value.trim();
+            // Check if the phone number has exactly 10 digits
+            if (/^\d{10}$/.test(phoneNumber)) {
+                phoneNumberError.textContent = ''; // Clear any existing error message
+            } else {
+                phoneNumberError.textContent = 'Please enter a 10-digit phone number';
+            }
+        }
+
+        function validateEmail(inputFieldId) {
+            let emailInput = document.getElementById(inputFieldId);
+            let emailError = document.getElementById(inputFieldId + 'Error');
+            let email = emailInput.value.trim();
+            // Regular expression for basic email validation
+            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            // Check if the email matches the regular expression and follows additional restrictions
+            if (emailRegex.test(email) && isValidEmailFormat(email) && email.endsWith('@gmail.com')) {
+                emailError.textContent = ''; // Clear any existing error message
+            } else {
+                emailError.textContent = 'Please enter a valid email address ending with "@gmail.com"';
+            }
+        }
+        function isValidEmailFormat(email) {
+            // Check if the local part and domain part follow additional restrictions
+            let [localPart, domainPart] = email.split('@');
+            // Local part restrictions (only lowercase letters allowed)
+            let localPartRegex = /^[a-z0-9._-]+$/;
+            if (!localPartRegex.test(localPart) || localPart.startsWith('.') || localPart.endsWith('.') || localPart.includes('..')) {
+                return false;
+            }
+            // Domain part restrictions
+            let domainRegex = /^[^\s@]+\.[^\s@]+$/;
+            if (!domainRegex.test(domainPart) || domainPart.startsWith('.') || domainPart.endsWith('.')) {
+                return false;
+            }
+            return true;
+        }
+        function validateAdmissionNumber() {
+            let admissionNumberInput = document.getElementById('admno');
+            let admissionNumberError = document.getElementById('admnoError');
+            let admissionNumber = admissionNumberInput.value.trim();
+            // Check if the admission number contains only alphabets, numbers, and "/"
+            if (/^[a-zA-Z0-9/]+$/.test(admissionNumber)) {
+                admissionNumberError.textContent = ''; // Clear any existing error message
+            } else {
+                admissionNumberError.textContent = 'Only alphabets, numbers, and "/" are allowed';
+                admissionNumberInput.value = ''; // Clear the input value
+            }
+        }
+        function restrictToNumericInput(elementId, errorId, errorMessage) {
+            let inputElement = document.getElementById(elementId);
+            let errorElement = document.getElementById(errorId);
+            inputElement.addEventListener('input', function () {
+                // Replace any non-numeric characters with an empty string
+                this.value = this.value.replace(/[^0-9]/g, '');
+                // Check if the input is a valid number
+                if (/^\d+$/.test(this.value)) {
+                    errorElement.textContent = ''; // Clear any existing error message
+                } else {
+                    errorElement.textContent = errorMessage;
+                }
+            });
+        }
+        // Use the function for Age input
+        restrictToNumericInput('age', 'ageError', 'Please enter a valid age');
+
+        // Use the function for Pin Code input
+        restrictToNumericInput('pincode', 'pincodeError', 'Please enter a valid pin code');
+
+        // Use the function for Annual Income input
+        restrictToNumericInput('no', 'incomeError', 'Please enter a valid annual income');
+
+        function checkRequiredFields(pageId, errorId) {
+            let requiredFields = [];
+            let allFieldsFilled = true;
+            let errorMessages = [];
+            if (pageId === 'registrationForm') {
+                requiredFields = ['fullname', 'dateofbirth', 'email', 'mobileno', 'gender', 'age'];
+                // Add other required fields on this page
+            } else if (pageId === 'nextForm') {
+                requiredFields = ['admno', 'admquota', 'doa', 'admittedprgm', 'branch'];
+                // Add other required fields on this page
+            } else if (pageId === 'next1Form') {
+                requiredFields = ['address', 'pincode', 'nation', 'state', 'district', 'panchayat', 'taluk',];
+                // Add other required fields on this page
+            }else if (pageId === 'next2Form') {
+        requiredFields = ['fname', 'fjob', 'femail', 'mname', 'mjob', 'memail', 'no'];
+    }
+            requiredFields.forEach(fieldId => {
+                let field = document.getElementById(fieldId);
+
+                if (field.type === 'select-one') {
+                    // Check for a dropdown (select) element
+                    if (field.value === 'select') {
+                        allFieldsFilled = false;
+                        errorMessages.push(`Please select a valid ${fieldId}`);
+                    }
+                } else {
+                    // For other fields, use the trimmed value
+                    if (!field.value.trim()) {
+                        allFieldsFilled = false;
+                        errorMessages.push(`Please fill in ${fieldId}`);
+                    }
+                }
+            });
+            document.getElementById(errorId).textContent = errorMessages.join(', ');
+            return allFieldsFilled;
+        }
+
+        function movetonextpage(currentPage, errorId, nextPage) {
+            // Check required fields on the current page
+            let isAllFieldFilled = checkRequiredFields(currentPage, errorId);
+            // If all required fields are filled, move to the next page
+            if (isAllFieldFilled) {
+                document.getElementById(currentPage).style.display = 'none';
+                document.getElementById(errorId).textContent = ''; // Clear any existing error message
+                document.getElementById(nextPage).style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>
